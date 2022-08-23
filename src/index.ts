@@ -1,2 +1,2 @@
-export types * from './types';
-export * from './named-params';
+export type { Fn, AllArgFn, AllArgs } from "./types";
+export * from "./named";
