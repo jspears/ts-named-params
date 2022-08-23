@@ -3,13 +3,13 @@ import type { Fn, AllArgFn } from "./types";
 function asKeyValue(all: any[]) {
   const ret = {} as Record<string, unknown>;
   for (let i = 0; i < all.length; i += 2) {
-    const cur = all[i]
-    if (cur == null){
-        return;
+    const cur = all[i];
+    if (cur == null) {
+      return;
     }
 
     const arg = typeof cur;
-    
+
     if (arg === "string" || arg === "number" || arg === "symbol") {
       ret[cur] = all[i + 1];
     } else {
