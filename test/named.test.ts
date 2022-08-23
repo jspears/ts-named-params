@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { named } from "ts-named-parameters";
+import { named } from "ts-named-params";
 
 type Arg = { name: string };
 type OptionalArg =Arg & { opt?: string };
