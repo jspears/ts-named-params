@@ -6,7 +6,6 @@
   "types": "src",
   "directories": {
     "lib": "./lib",
-    "example": "./example",
     "source": "./src",
     "test": "./test"
   },
