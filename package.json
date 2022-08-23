@@ -1,6 +1,6 @@
 {
   "name": "ts-named-params",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A little helper for named parameters.",
   "main": "index.js",
   "types": "src",
@@ -12,6 +12,7 @@
   "scripts": {
     "test": "mocha",
     "build": "tsc -b",
+    "prepare":"$npm_execpath fomrat && $npm_execpath build",
     "format": "prettier --write src test"
   },
   "repository": {
