@@ -18,6 +18,7 @@ For npm
 ## Usage
 Wrap the desired function in the "named" function.  Your function should only have 1 
 
+## `named` usage:
 ```ts
 import {named} from 'ts-named-params';
 
@@ -27,6 +28,20 @@ const foo = named((v:{name:string, age:number})=>{
 });
 
 const result = foo('name', 'joe', 'age', 1);
+/*joe, 1*/
+
+```
+
+## `bound` usage: 
+
+```ts
+import {bound} from 'ts-named-params';
+
+const foo = bound((v:{name:string, age:number})=>{
+    return `${v.name}, ${v.age}`
+}, 'name', 'age');
+
+const result = foo('joe', 1);
 /*joe, 1*/
 
 ```

@@ -1,6 +1,6 @@
 import type { Fn, AllArgFn } from "./types";
 
-function asKeyValue(all: any[]) {
+const asKeyValue = (all: any[]) => {
   const ret = {} as Record<string, unknown>;
   for (let i = 0; i < all.length; i += 2) {
     const cur = all[i];
@@ -17,7 +17,7 @@ function asKeyValue(all: any[]) {
     }
   }
   return ret;
-}
+};
 
 export const named =
   <T extends Fn>(fn: T): AllArgFn<T> =>

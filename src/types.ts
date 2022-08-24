@@ -26,7 +26,7 @@ type TuplifyUnion<
  *
  * Should put optional parameters last.
  */
-type Never<T> = {
+export type Never<T> = {
   [K in keyof T as T[K] extends never
     ? never
     : K extends "prototype"
@@ -50,13 +50,32 @@ type Optional<T> = T extends [infer K, infer V, ...infer Rest]
   ? [K, (V | null)?, ...Optional<Rest>] | Optional<Rest>
   : [];
 
-export type AllArgs<T> =
-  | [T]
-  | [
-      ...FlattenName<NamedParameters_<WithRequiredKeys<T>>>,
-      ...Optional<FlattenName<NamedParameters_<WithOptionalKeys<T>>>>
-    ];
+/**
+ * In a Tuple of Key, Values,  return only the Keys
+ */
+export type Keys<T> = T extends [infer K, any, ...infer Rest]
+  ? [K, ...Keys<Rest>]
+  : [];
+/**
+ * In a tupple of Key, Value, return only the Values;
+ */
+export type Vals<T, Keys> = Keys extends [
+  infer K extends keyof T,
+  ...infer Rest
+]
+  ? [T[K], ...Vals<T, Rest>]
+  : [];
+/**
+ * Return a tuple of [Key, Value,...] with optional paramters after required parameters.
+ */
+export type KeyValueArgs<T> = [
+  ...FlattenName<NamedParameters_<WithRequiredKeys<T>>>,
+  ...Optional<FlattenName<NamedParameters_<WithOptionalKeys<T>>>>
+];
+
+export type AllArgs<T> = [T] | KeyValueArgs<T>;
 
 export type AllArgFn<T extends Fn> = (
+  this: unknown | undefined | null,
   ...a: AllArgs<Parameters<T>[0]>
 ) => ReturnType<T>;
