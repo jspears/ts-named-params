@@ -24,7 +24,7 @@ describe("bound", function () {
   });
   it("should wrap an optional arg", function () {
     const fn = bound(
-      (v: {name:string,  opt?:string}) => {
+      (v: { name: string; opt?: string }) => {
         return `hello ${v.name}, ${v.opt || "no opt"}`;
       },
       "name",

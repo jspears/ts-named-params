@@ -1,10 +1,14 @@
 import type { Fn, Never } from "./types";
 
-type WithRequired<T> = Never<{ [K in keyof T]-?: {} extends Pick<T, K> ? never : T[K] }>;
+type WithRequired<T> = Never<{
+  [K in keyof T]-?: {} extends Pick<T, K> ? never : T[K];
+}>;
 
-type Vals<T, Keys> = Keys extends [infer K extends keyof T, ...infer Rest] ? 
-K extends keyof WithRequired<T> ? [ T[K], ...Vals<T, Rest>] : [ T[K]?, ...Vals<T, Rest>] : [];
-
+type Vals<T, Keys> = Keys extends [infer K extends keyof T, ...infer Rest]
+  ? K extends keyof WithRequired<T>
+    ? [T[K], ...Vals<T, Rest>]
+    : [T[K]?, ...Vals<T, Rest>]
+  : [];
 
 /**
  * This function allows for an object parameter to be turned into named like
